@@ -1,24 +1,14 @@
 package br.com.pedroalex.jogodamemoria.model;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
-
-import br.com.pedroalex.jogodamemoria.R;
+import android.widget.ImageView;
 
 public class Botao {
     private Integer numeroImagemSorteada;
     private Boolean ivJaClicado;
     private Boolean parEncontrado;
     private Integer posicaoBotao;
-    private Context contexto;
-
-    public Context getContexto() {
-        return contexto;
-    }
-
-    public void setContexto(Context contexto) {
-        this.contexto = contexto;
-    }
+    private ImageView imageView;
 
     public Integer getNumeroImagemSorteada() {
         return numeroImagemSorteada;
@@ -52,7 +42,11 @@ public class Botao {
         this.posicaoBotao = posicaoBotao;
     }
 
-    public void setImageDrawable(Drawable drawable) {
+    public ImageView getImageView() {
+        return imageView;
+    }
 
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
     }
 }
