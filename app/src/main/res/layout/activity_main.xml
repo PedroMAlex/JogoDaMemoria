@@ -120,7 +120,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5sp"
                     android:gravity="center_vertical"
-                    android:text="Acertos:"
+                    android:text="Pontos:"
                     android:textSize="20sp" />
 
                 <TextView

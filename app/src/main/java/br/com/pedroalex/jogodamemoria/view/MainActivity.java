@@ -19,6 +19,9 @@ import br.com.pedroalex.jogodamemoria.controller.Sorteio;
 import br.com.pedroalex.jogodamemoria.model.Botao;
 
 public class MainActivity extends AppCompatActivity {
+    private List<Botao> botoes;
+    private Activity activity;
+
     private ImageView iv00;
     private ImageView iv01;
     private ImageView iv02;
@@ -35,19 +38,16 @@ public class MainActivity extends AppCompatActivity {
     private ImageView iv13;
     private ImageView iv14;
     private ImageView iv15;
-    private Activity activity;
-    private List<Botao> botoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        activity = this;
         carregarComponentes();
     }
 
     private void carregarComponentes() {
-        activity = this;
-
         TextView txtJogador = findViewById(R.id.txtJogador);
         TextView txtNumeroAcertos = findViewById(R.id.txtNumeroAcertos);
         TextView txtNumeroErros = findViewById(R.id.txtNumeroErros);

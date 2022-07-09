@@ -3,6 +3,7 @@ package br.com.pedroalex.jogodamemoria.controller;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -16,88 +17,112 @@ import br.com.pedroalex.jogodamemoria.model.Botao;
 public class MudarImagens {
     private static final int delay = 3000;
     private static final int interval = 3000;
+    private static int paresEncontrados;
 
 
     public static Botao setImagem(Context context, Botao botaoClicado, List<Botao> botoes) {
 
-        if (!botaoClicado.getIvJaClicado()) {                                           // SÓ FAZ ALGUMA COISA SE O BOTÃO NÃO ESTIVER CLICADO
+        paresEncontrados = 0;                                                               // INCIALIZADNO A CONTAGEM DOS BOTÕES COM PARES ENCONTRADOS
 
-            atribuirImagens(context, botaoClicado);                                     // MOSTRAR A IMAGEM NO BOTÃO CONFORME O QUE FOI SORTEADO
+        if (!botaoClicado.getIvJaClicado()) {                                               // SÓ FAZ ALGUMA COISA SE O BOTÃO NÃO ESTIVER CLICADO
 
-            botaoClicado.setIvJaClicado(true);                                          // SETAR O BOTÃO COMO CLICADO PARA QUE CASO SEJA CLICADO NOVAMENTE NÃO PASSE MAIS POR AQUI
+            Log.i("meuScript", "Botão clicado: " + botaoClicado.getPosicaoBotao());
 
-            botoes.forEach(botaoLista -> {                                              // PERCORRER A LISTA DE TODOS OS BOTÕES
+            virarBotao(context, botaoClicado);                                              // MOSTRAR A IMAGEM NO BOTÃO CONFORME O QUE FOI SORTEADO
 
-                if (botaoLista.getPosicaoBotao() != botaoClicado.getPosicaoBotao()) {   // AQUI ELE SÓ ENTRA SE O BOTÃO DA LISTA NÃO FOI O MESMO BOTÃO QUE FOI CLICADO NO MOMENTO
+            botaoClicado.setIvJaClicado(true);                                              // SETAR O BOTÃO COMO CLICADO PARA QUE CASO SEJA CLICADO NOVAMENTE NÃO PASSE MAIS POR AQUI
 
-                    if (botaoLista.getIvJaClicado() &&
-                            !botaoLista.getParEncontrado() &&
-                            botaoLista.getPosicaoBotao() !=
-                                    botaoClicado.getPosicaoBotao()) {                   // CHECAR SE O BOTÃO DA LISTA JÁ FOI CLICADO EM OUTRO MOMENTO, SE NÃO FOI ENCONTRADO O PAR DELE AINDA E SE ELE NÃO É O BOTÃO CLICADO
+            botoes.forEach(botaoLista -> {                                                  // PERCORRER A LISTA DE TODOS OS BOTÕES
 
-                        if (botaoLista.getNumeroImagemSorteada() ==
-                                botaoClicado.getNumeroImagemSorteada()) {               // CASO OS NÚMEROS SORTEADOS DO BOTÃO CLIADO E DO BOTÃO DA LISTA FOREM IGUAIS
+                if (botaoLista.getParEncontrado())
+                    paresEncontrados++;                                                     // CONTA QUANTOS BOTÕES COM PARES ENCONTRADOS JÁ FORAM ACHADOS
 
-                            Toast.makeText(context, "ACERTOU", Toast.LENGTH_SHORT).show();
+                if (botaoLista.getPosicaoBotao() != botaoClicado.getPosicaoBotao()) {       // AQUI ELE SÓ ENTRA SE O BOTÃO DA LISTA NÃO FOI O MESMO BOTÃO QUE FOI CLICADO NO MOMENTO
 
-                            botoes.get(botaoLista.getPosicaoBotao())
-                                    .setIvJaClicado(true);                             // SETAR O BOTAO CLICADO PARA PAR ENCONTRADO VERDADEIRO
+                    if (botaoLista.getIvJaClicado() &&                                      // CHECAR SE O BOTÃO DA LISTA JÁ FOI CLICADO EM OUTRO MOMENTO, SE NÃO FOI ENCONTRADO O PAR DELE AINDA E SE ELE NÃO É O BOTÃO CLICADO
+                            botaoLista.getPosicaoBotao() != botaoClicado.getPosicaoBotao()) {
 
-                            botoes.get(botaoLista.getPosicaoBotao())
-                                    .setParEncontrado(true);                           // SETAR QUE O BOTAO CLICADO TEVE SEU PAR ENCONTRADO
+                        if (!botaoLista.getParEncontrado()) {
 
-                            botoes.get(botaoClicado.getPosicaoBotao())
-                                    .setIvJaClicado(true);                              // SETAR NA LISTA QUE O BOTÃO CLICADO É VERDADEIRO
+                            Log.i("'meuScript", "Botão " + botaoLista.getPosicaoBotao() + " da lista sem par ainda e não é o clicado no momento " + botaoClicado.getPosicaoBotao());
 
-                            botoes.get(botaoClicado.getPosicaoBotao())
-                                    .setParEncontrado(true);                            // SETAR NA LISTA QUE O BOTÃO CLICADO TEVE SEU PAR ENCONTRADO
+                            if (botaoLista.getNumeroImagemSorteada() ==
+                                    botaoClicado.getNumeroImagemSorteada()) {               // CASO OS NÚMEROS SORTEADOS DO BOTÃO CLIADO E DO BOTÃO DA LISTA FOREM IGUAIS
 
-                        } else {                                                        // CASO OS NÚMEROS SORTEADOS DO BOTÃO CLICADO E DO BOTÃO DA LISTA NÃO SEJAM IGUAIS
+                                // CHAMAR AQUI A CLASSE DOS PONTOS E ADICIONAR 3 PONTOS PELO ACERTO
+                                Log.i("meuScript", "ACERTOU: Botão Clicado imagem: " + botaoClicado.getNumeroImagemSorteada() + " - Botão da Lista imagem: " + botaoLista.getNumeroImagemSorteada());
 
-                            Toast.makeText(context, "ERROU", Toast.LENGTH_SHORT).show();
+                                paresEncontrados = paresEncontrados + 2;
 
-                            botoes.get(botaoLista.getPosicaoBotao())
-                                    .setIvJaClicado(false);                             // SETAR O BOTAO CLICADO PARA PAR ENCONTRADO FALSO
+                                botoes.get(botaoLista.getPosicaoBotao())
+                                        .setIvJaClicado(true);                              // SETAR O BOTAO CLICADO PARA PAR ENCONTRADO VERDADEIRO
 
-                            botoes.get(botaoLista.getPosicaoBotao())
-                                    .setParEncontrado(false);                           // SETAR QUE O BOTAO CLICADO NÃO TEVE SEU PAR ENCONTRADO
+                                botoes.get(botaoLista.getPosicaoBotao())
+                                        .setParEncontrado(true);                            // SETAR QUE O BOTAO CLICADO TEVE SEU PAR ENCONTRADO
 
-                            botoes.get(botaoClicado.getPosicaoBotao())
-                                    .setIvJaClicado(false);                             // SETAR NA LISTA QUE O BOTÃO CLICADO É FALSO
+                                botoes.get(botaoClicado.getPosicaoBotao())
+                                        .setIvJaClicado(true);                              // SETAR NA LISTA QUE O BOTÃO CLICADO É VERDADEIRO
 
-                            botoes.get(botaoClicado.getPosicaoBotao())
-                                    .setParEncontrado(false);                           // SETAR NA LISTA QUE O BOTÃO CLICADO NÃO TEVE SEU PAR ENCONTRADO
+                                botoes.get(botaoClicado.getPosicaoBotao())
+                                        .setParEncontrado(true);                            // SETAR NA LISTA QUE O BOTÃO CLICADO TEVE SEU PAR ENCONTRADO
 
-                            Timer timer = new Timer();                                  // AGUARDAR 2 SEGUNDOS
-                            timer.scheduleAtFixedRate(new TimerTask() {
-                                public void run() {
-                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                        @Override
-                                        public void run() {                             // DESVIRANDO AS IMAGENS
-                                            botaoClicado.getImageView().setImageDrawable(context.getResources().getDrawable(R.drawable.i));
-                                            botaoLista.getImageView().setImageDrawable(context.getResources().getDrawable(R.drawable.i));
-                                        }
-                                    });
-                                }
-                            }, delay, interval);
+                            } else {                                                        // CASO OS NÚMEROS SORTEADOS DO BOTÃO CLICADO E DO BOTÃO DA LISTA NÃO SEJAM IGUAIS
 
+                                // CHAMAR AQUI A CLASSE DOS PONTOS E ABATER 1 PONTO PELO ERRO
+                                Log.i("meuScript", "ERROU: Botão Clicado imagem: " + botaoClicado.getNumeroImagemSorteada() + " - Botão da Lista imagem: " + botaoLista.getNumeroImagemSorteada());
+
+                                botoes.get(botaoLista.getPosicaoBotao())
+                                        .setIvJaClicado(false);                             // SETAR O BOTAO CLICADO PARA PAR ENCONTRADO FALSO
+
+                                botoes.get(botaoLista.getPosicaoBotao())
+                                        .setParEncontrado(false);                           // SETAR QUE O BOTAO CLICADO NÃO TEVE SEU PAR ENCONTRADO
+
+                                botoes.get(botaoClicado.getPosicaoBotao())
+                                        .setIvJaClicado(false);                             // SETAR NA LISTA QUE O BOTÃO CLICADO É FALSO
+
+                                botoes.get(botaoClicado.getPosicaoBotao())
+                                        .setParEncontrado(false);                           // SETAR NA LISTA QUE O BOTÃO CLICADO NÃO TEVE SEU PAR ENCONTRADO
+
+                                // desvirarBotoes(context, botaoClicado.getImageView(), botaoLista.getImageView());
+                            }
                         }
                     }
                 }
             });
 
+            Log.i("meuScript", "Botões com pares encontrados: " + paresEncontrados);
 
-        } else {                                                                        // SE O BOTÃO JÁ ESTIVER CLICADO AVISAR AO JOGADOR PARA ESCOLHER UM NÃO CLICADO AINDA
+            if (paresEncontrados >= 16) {                                                   // CHECAR SE O JOGO CHEGOU AO SEU FINAL
+                Log.i("meuScript", "=-=-=-=-=-=-= GAME OVER =-=-=-=-=-=-=");
+            }
 
-            Toast.makeText(context, "Clique somente em botões com ?", Toast.LENGTH_SHORT).show();
+
+        } else {                                                                            // SE O BOTÃO JÁ ESTIVER CLICADO AVISAR AO JOGADOR PARA ESCOLHER UM NÃO CLICADO AINDA
+
+            Log.i("meuScript", "Botão já estava virado: " + botaoClicado.getPosicaoBotao());
+            Toast.makeText(context, "CLIQUE NUM BOTÃO QUE AINDA NÃO FOI VIRADO", Toast.LENGTH_SHORT).show();
 
         }
 
         return botaoClicado;
     }
 
-    private static void atribuirImagens (Context context, Botao botaoClicado){
+    private static void desvirarBotoes(Context context, ImageView botaoClicado, ImageView botaoLista) {
+        Timer timer = new Timer();                                      // AGUARDAR 2 SEGUNDOS
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {                                 // DESVIRANDO AS IMAGENS
+                        botaoClicado.setImageDrawable(context.getResources().getDrawable(R.drawable.i));
+                        botaoLista.setImageDrawable(context.getResources().getDrawable(R.drawable.i));
+                    }
+                });
+            }
+        }, delay, interval);
+    }
 
+    private static void virarBotao (Context context, Botao botaoClicado){
         switch (botaoClicado.getNumeroImagemSorteada()) {
             case 0:
                 botaoClicado.getImageView().setImageDrawable(context.getResources().getDrawable(R.drawable.i00));
