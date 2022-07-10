@@ -94,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
         iv02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(2), botoes);            }
+                MudarImagens.setImagem(activity, botoes.get(2), botoes);
+            }
         });
 
         iv03.setOnClickListener(new View.OnClickListener() {
@@ -189,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    
 
     private void atribuirImageViewAosBotoes (List<Botao> botoes) {
         botoes.get(0).setImageView(iv00);
