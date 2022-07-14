@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView iv13;
     private ImageView iv14;
     private ImageView iv15;
-    private TextView pontos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void carregarComponentes() {
-        TextView txtJogador = findViewById(R.id.txtJogador);
         TextView txtNumeroAcertos = findViewById(R.id.txtNumeroAcertos);
         TextView txtNumeroErros = findViewById(R.id.txtNumeroErros);
         TextView txtPontos = findViewById(R.id.txtPontos);
-
+        TextView txtJogador = findViewById(R.id.txtJogador);
+        txtJogador.setText(getIntent().getStringExtra("nome"));
 
         iv00 = findViewById(R.id.iv00);
         iv01 = findViewById(R.id.iv01);
@@ -69,14 +68,8 @@ public class MainActivity extends AppCompatActivity {
         iv14 = findViewById(R.id.iv14);
         iv15 = findViewById(R.id.iv15);
 
-        txtJogador.setText(getIntent().getStringExtra("nome"));
-
         botoes = Sorteio.sorteandoImagens(activity);
         atribuirImageViewAosBotoes(botoes);
-        new MudarImagens.setImagem(txtPontos);
-        new MudarImagens.setImagem(txtNumeroAcertos);
-        new MudarImagens.setImagem(txtNumeroErros);
-
 
         // SETANDO OS CLIQUES DOS BOTÕES
         iv00.setOnClickListener(new View.OnClickListener() {
@@ -211,5 +204,4 @@ public class MainActivity extends AppCompatActivity {
         botoes.get(14).setImageView(iv14);
         botoes.get(15).setImageView(iv15);
     }
-
 }

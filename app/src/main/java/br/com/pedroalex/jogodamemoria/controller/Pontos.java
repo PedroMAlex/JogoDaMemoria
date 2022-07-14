@@ -3,11 +3,20 @@ package br.com.pedroalex.jogodamemoria.controller;
 import android.widget.TextView;
 
 public class Pontos {
+    private TextView txtNumeroAcertos;
+    private TextView txtPontos;
+    private TextView txtNumeroErros;
 
-    public static void setPontuacao(boolean foiAcerto, TextView txtNumeroAcertos, TextView txtPontos, TextView txtNumeroErros) {
-        int pontos = Integer.valueOf(txtPontos.getText().toString());
-        int acertos = Integer.valueOf(txtNumeroAcertos.getText().toString());
-        int erros = Integer.valueOf(txtNumeroErros.getText().toString());
+    public Pontos(TextView txtPontos, TextView txtNumeroAcertos, TextView txtNumeroErros) {
+        this.txtNumeroAcertos = txtNumeroAcertos;
+        this.txtNumeroErros = txtNumeroErros;
+        this.txtPontos = txtPontos;
+    }
+
+    public void setPontuacao(boolean foiAcerto) {
+        int pontos = Integer.parseInt(txtPontos.getText().toString());
+        int acertos = Integer.parseInt(txtNumeroAcertos.getText().toString());
+        int erros = Integer.parseInt(txtNumeroErros.getText().toString());
 
         if (foiAcerto) {
             acertos++;

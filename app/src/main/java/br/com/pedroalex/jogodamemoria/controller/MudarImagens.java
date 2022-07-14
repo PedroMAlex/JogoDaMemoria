@@ -13,9 +13,12 @@ import br.com.pedroalex.jogodamemoria.model.Botao;
 
 public class MudarImagens {
     private static final int delay = 1000;                                                  // DEFININDO O TEMPO DE ESPERA QUANDO AS IMAGENS NÃO SÃO IGUAIS ANTES DE DESVIRAR
+
     private static int botoesComParesEncontrados;                                           // CONTAR A QUANTIDADE DE BOTÕES COM PAR ENCONTRADO PARA SABERMOS O MOMENTO DE FINALIZAR O JOGO
 
     public static void setImagem(Context context, Botao botaoClicado, List<Botao> botoes, TextView txtPontos, TextView txtNumeroAcertos, TextView txtNumeroErros) {
+
+        Pontos pontos = new Pontos(txtPontos, txtNumeroAcertos, txtNumeroErros);            // INSTANCIANDO A CLASSE DOS PONTOS
 
         botoesComParesEncontrados = 0;                                                      // INCIALIZADNO A CONTAGEM DOS BOTÕES COM PARES ENCONTRADOS
 
@@ -42,14 +45,13 @@ public class MudarImagens {
                             Log.i("'meuScript", "Botão " + botaoLista.getPosicaoBotao() + " da lista sem par ainda e não é o clicado no momento " + botaoClicado.getPosicaoBotao());
 
                             if (botaoLista.getNumeroImagemSorteada() ==
-                                    botaoClicado.getNumeroImagemSorteada()) { // CASO OS NÚMEROS SORTEADOS DO BOTÃO CLICADO E DO BOTÃO DA LISTA FOREM IGUAIS
-
-                                Pontos.setPontuacao(true, txtNumeroAcertos, txtPontos, txtNumeroErros);
+                                    botaoClicado.getNumeroImagemSorteada()) {               // CASO OS NÚMEROS SORTEADOS DO BOTÃO CLICADO E DO BOTÃO DA LISTA FOREM IGUAIS
 
                                 Log.i("meuScript", "ACERTOU: Botão Clicado imagem: " + botaoClicado.getNumeroImagemSorteada() + " - Botão da Lista imagem: " + botaoLista.getNumeroImagemSorteada());
 
-                                botoesComParesEncontrados = botoesComParesEncontrados + 2;
+                                pontos.setPontuacao(true);                                  // MEXENDO NO PLACAR PELO ACERTO
 
+                                botoesComParesEncontrados = botoesComParesEncontrados + 2;
 
                                 botoes.get(botaoLista.getPosicaoBotao())
                                         .setIvJaClicado(true);                              // SETAR O BOTAO CLICADO PARA PAR ENCONTRADO VERDADEIRO
@@ -65,9 +67,9 @@ public class MudarImagens {
 
                             } else {                                                        // CASO OS NÚMEROS SORTEADOS DO BOTÃO CLICADO E DO BOTÃO DA LISTA NÃO SEJAM IGUAIS
 
-                                Pontos.setPontuacao(false, txtNumeroAcertos, txtPontos, txtNumeroErros);
-
                                 Log.i("meuScript", "ERROU: Botão Clicado imagem: " + botaoClicado.getNumeroImagemSorteada() + " - Botão da Lista imagem: " + botaoLista.getNumeroImagemSorteada());
+
+                                pontos.setPontuacao(false);                                 // MEXENDO NO PLACAR PELO ERRO
 
                                 botoes.get(botaoLista.getPosicaoBotao())
                                         .setIvJaClicado(false);                             // SETAR O BOTAO CLICADO PARA PAR ENCONTRADO FALSO
@@ -83,8 +85,7 @@ public class MudarImagens {
 
                                 new CountDownTimer(delay, delay) {                          // AGUARDAR O DELAY E DESVIRAR AS IMAGENS
                                     @Override
-                                    public void onTick(long millisUntilFinished) {
-                                    }
+                                    public void onTick(long millisUntilFinished) { }
 
                                     @Override
                                     public void onFinish() {
@@ -139,11 +140,6 @@ public class MudarImagens {
             case 7:
                 botaoClicado.getImageView().setImageDrawable(context.getDrawable(R.drawable.i07));
                 break;
-        }
-    }
-
-    public static class setImagem {
-        public setImagem(TextView txtNumeroErros) {
         }
     }
 }
