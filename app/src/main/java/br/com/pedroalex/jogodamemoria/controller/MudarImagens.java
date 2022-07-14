@@ -1,6 +1,5 @@
 package br.com.pedroalex.jogodamemoria.controller;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -13,19 +12,11 @@ import br.com.pedroalex.jogodamemoria.R;
 import br.com.pedroalex.jogodamemoria.model.Botao;
 
 public class MudarImagens {
-    private static final int delay = 1000; // DEFININDO O TEMPO DE ESPERA QUANDO AS IMAGENS NÃO SÃO IGUAIS ANTES DE DESVIRAR
-    // private static int placarPontuacao;
-    // private static int placarErros;
-    //  private static int placarAcertos;
-
-
-    private static int botoesComParesEncontrados; // CONTAR A QUANTIDADE DE BOTÕES COM PAR ENCONTRADO PARA SABERMOS O MOMENTO DE FINALIZAR O JOGO
-    private static Object PontosAcertos;
-    private static Object PontosErros;
+    private static final int delay = 1000;                                                  // DEFININDO O TEMPO DE ESPERA QUANDO AS IMAGENS NÃO SÃO IGUAIS ANTES DE DESVIRAR
+    private static int botoesComParesEncontrados;                                           // CONTAR A QUANTIDADE DE BOTÕES COM PAR ENCONTRADO PARA SABERMOS O MOMENTO DE FINALIZAR O JOGO
 
     public static void setImagem(Context context, Botao botaoClicado, List<Botao> botoes, TextView txtPontos, TextView txtNumeroAcertos, TextView txtNumeroErros) {
 
-        int p = 16;
         botoesComParesEncontrados = 0;                                                      // INCIALIZADNO A CONTAGEM DOS BOTÕES COM PARES ENCONTRADOS
 
         if (!botaoClicado.getIvJaClicado()) {                                               // SÓ FAZ ALGUMA COISA SE O BOTÃO NÃO ESTIVER CLICADO
@@ -53,8 +44,7 @@ public class MudarImagens {
                             if (botaoLista.getNumeroImagemSorteada() ==
                                     botaoClicado.getNumeroImagemSorteada()) { // CASO OS NÚMEROS SORTEADOS DO BOTÃO CLICADO E DO BOTÃO DA LISTA FOREM IGUAIS
 
-
-                                new Pontos.pontos(txtNumeroAcertos, txtPontos, txtNumeroErros, botaoLista, botaoClicado);
+                                Pontos.setPontuacao(true, txtNumeroAcertos, txtPontos, txtNumeroErros);
 
                                 Log.i("meuScript", "ACERTOU: Botão Clicado imagem: " + botaoClicado.getNumeroImagemSorteada() + " - Botão da Lista imagem: " + botaoLista.getNumeroImagemSorteada());
 
@@ -75,7 +65,8 @@ public class MudarImagens {
 
                             } else {                                                        // CASO OS NÚMEROS SORTEADOS DO BOTÃO CLICADO E DO BOTÃO DA LISTA NÃO SEJAM IGUAIS
 
-                                new Pontos.pontos(txtNumeroAcertos, txtPontos, txtNumeroErros, botaoLista, botaoClicado);
+                                Pontos.setPontuacao(false, txtNumeroAcertos, txtPontos, txtNumeroErros);
+
                                 Log.i("meuScript", "ERROU: Botão Clicado imagem: " + botaoClicado.getNumeroImagemSorteada() + " - Botão da Lista imagem: " + botaoLista.getNumeroImagemSorteada());
 
                                 botoes.get(botaoLista.getPosicaoBotao())
