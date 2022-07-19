@@ -25,7 +25,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         titulo = findViewById(R.id.txt_titulo);
         proximo = findViewById(R.id.btn_proximo);
         sair = findViewById(R.id.btn_sair);
-        imagem = findViewById(R.id.img_bonecoDuvida);
+        imagem = findViewById(R.id.img_imagemTelaInicial);
 
         proximo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) { // adciondei um evento de clique.

@@ -34,7 +34,7 @@ public class PlayerNameActivity extends AppCompatActivity {
 
         btnIniciarOJogo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (txtNome.getText().length() == 0) {
+                if (edtNomeJogador.getText().length() == 0) {
                     Toast.makeText(activity, "Antes de começar informe seu nome", Toast.LENGTH_LONG).show();
                 } else {
                     Intent intent = new Intent(activity, MainActivity.class);

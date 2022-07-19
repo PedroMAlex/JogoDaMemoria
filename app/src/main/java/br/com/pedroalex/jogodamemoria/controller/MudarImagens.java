@@ -16,9 +16,9 @@ public class MudarImagens {
 
     private static int botoesComParesEncontrados;                                           // CONTAR A QUANTIDADE DE BOTÕES COM PAR ENCONTRADO PARA SABERMOS O MOMENTO DE FINALIZAR O JOGO
 
-    public static void setImagem(Context context, Botao botaoClicado, List<Botao> botoes, TextView txtPontos, TextView txtNumeroAcertos, TextView txtNumeroErros) {
+    public static void setImagem(Context context, Botao botaoClicado, List<Botao> botoes, TextView txtPontos, TextView txtNumeroAcertos, TextView txtNumeroErros, TextView txtTentivas) {
 
-        Pontos pontos = new Pontos(txtPontos, txtNumeroAcertos, txtNumeroErros);            // INSTANCIANDO A CLASSE DOS PONTOS
+        Pontos pontos = new Pontos(txtPontos, txtNumeroAcertos, txtNumeroErros, txtTentivas);            // INSTANCIANDO A CLASSE DOS PONTOS
 
         botoesComParesEncontrados = 0;                                                      // INCIALIZADNO A CONTAGEM DOS BOTÕES COM PARES ENCONTRADOS
 
@@ -39,6 +39,7 @@ public class MudarImagens {
 
                     if (botaoLista.getIvJaClicado() &&                                      // CHECAR SE O BOTÃO DA LISTA JÁ FOI CLICADO EM OUTRO MOMENTO, SE NÃO FOI ENCONTRADO O PAR DELE AINDA E SE ELE NÃO É O BOTÃO CLICADO
                             botaoLista.getPosicaoBotao() != botaoClicado.getPosicaoBotao()) {
+
 
                         if (!botaoLista.getParEncontrado()) {
 
@@ -85,12 +86,13 @@ public class MudarImagens {
 
                                 new CountDownTimer(delay, delay) {                          // AGUARDAR O DELAY E DESVIRAR AS IMAGENS
                                     @Override
-                                    public void onTick(long millisUntilFinished) { }
+                                    public void onTick(long millisUntilFinished) {
+                                    }
 
                                     @Override
                                     public void onFinish() {
-                                        botaoClicado.getImageView().setImageDrawable(context.getDrawable(R.drawable.i));
-                                        botaoLista.getImageView().setImageDrawable(context.getDrawable(R.drawable.i));
+                                        botaoClicado.getImageView().setImageDrawable(context.getDrawable(R.drawable.itn));
+                                        botaoLista.getImageView().setImageDrawable(context.getDrawable(R.drawable.itn));
                                     }
                                 }.start();
                             }
