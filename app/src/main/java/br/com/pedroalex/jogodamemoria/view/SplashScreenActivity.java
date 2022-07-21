@@ -36,7 +36,10 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         sair.setOnClickListener(new View.OnClickListener() {
             public void onClick(View F) { // adciondei um evento de clique.
-                finish();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
     }

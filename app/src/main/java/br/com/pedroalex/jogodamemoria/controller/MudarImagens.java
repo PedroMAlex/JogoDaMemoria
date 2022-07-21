@@ -1,8 +1,13 @@
 package br.com.pedroalex.jogodamemoria.controller;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +21,26 @@ public class MudarImagens {
 
     private static int botoesComParesEncontrados;                                           // CONTAR A QUANTIDADE DE BOTÕES COM PAR ENCONTRADO PARA SABERMOS O MOMENTO DE FINALIZAR O JOGO
 
-    public static void setImagem(Context context, Botao botaoClicado, List<Botao> botoes, TextView txtPontos, TextView txtNumeroAcertos, TextView txtNumeroErros, TextView txtTentivas) {
+    public static void setImagem(Context context, Botao botaoClicado, List<Botao> botoes, TextView txtPontos, TextView txtNumeroAcertos, TextView txtNumeroErros, TextView txtTentivas, FrameLayout mensagemDecisao, Button btnReiniciarOJogo, Button btnSairDoJogo) {
+        if (botoesComParesEncontrados >= 16) {
+            mensagemDecisao.setVisibility(View.VISIBLE);
+            btnReiniciarOJogo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("meuScript", "Reiniciar aplicação");
+
+                }
+            });
+
+            btnSairDoJogo.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View F) { // adciondei um evento de clique.
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
+        }
 
         Pontos pontos = new Pontos(txtPontos, txtNumeroAcertos, txtNumeroErros, txtTentivas);            // INSTANCIANDO A CLASSE DOS PONTOS
 
@@ -144,4 +168,5 @@ public class MudarImagens {
                 break;
         }
     }
+
 }
