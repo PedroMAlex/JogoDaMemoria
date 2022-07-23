@@ -7,11 +7,11 @@
     android:background="@drawable/background"
     tools:context=".view.SplashScreenActivity">
 
+
     <TextView
         android:id="@+id/txt_titulo"
-        android:layout_width="212dp"
-        android:layout_height="167dp"
-        android:layout_marginLeft="94dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="77dp"
         android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
@@ -21,7 +21,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -30,7 +29,7 @@
         android:id="@+id/btn_proximo"
         style="@style/borda"
         android:layout_width="343dp"
-        android:layout_height="52dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
         android:text="PRÓXIMO"
         android:textColor="@color/white"
@@ -38,18 +37,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.765" />
+        app:layout_constraintVertical_bias="0.806" />
 
     <ImageView
         android:id="@+id/img_imagemTelaInicial"
-        android:layout_width="240dp"
-        android:layout_height="287dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="348dp"
+        android:layout_height="275dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_proximo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_titulo"
+        app:layout_constraintVertical_bias="0.142"
         app:srcCompat="@drawable/imageminicialjpg" />
-
 
     <Button
         android:id="@+id/btn_sair"
@@ -63,8 +63,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_proximo"
+        app:layout_constraintVertical_bias="0.276" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

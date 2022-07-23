@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView iv13;
     private ImageView iv14;
     private ImageView iv15;
+    private int designerWhidt;
+    private int designerHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

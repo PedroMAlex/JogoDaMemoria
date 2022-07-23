@@ -1,11 +1,12 @@
 package br.com.pedroalex.jogodamemoria.controller;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -16,32 +17,45 @@ import java.util.List;
 import br.com.pedroalex.jogodamemoria.R;
 import br.com.pedroalex.jogodamemoria.model.Botao;
 
+
 public class MudarImagens {
     private static final int delay = 1000;                                                  // DEFININDO O TEMPO DE ESPERA QUANDO AS IMAGENS NÃO SÃO IGUAIS ANTES DE DESVIRAR
 
     private static int botoesComParesEncontrados;                                           // CONTAR A QUANTIDADE DE BOTÕES COM PAR ENCONTRADO PARA SABERMOS O MOMENTO DE FINALIZAR O JOGO
 
-    public static void setImagem(Context context, Botao botaoClicado, List<Botao> botoes, TextView txtPontos, TextView txtNumeroAcertos, TextView txtNumeroErros, TextView txtTentivas, FrameLayout mensagemDecisao, Button btnReiniciarOJogo, Button btnSairDoJogo) {
-        if (botoesComParesEncontrados >= 16) {
-            mensagemDecisao.setVisibility(View.VISIBLE);
-            btnReiniciarOJogo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d("meuScript", "Reiniciar aplicação");
+    private Context mm;
 
+
+    public static void setImagem(Context context, Botao botaoClicado, List<Botao> botoes, TextView txtPontos, TextView txtNumeroAcertos, TextView txtNumeroErros, TextView txtTentivas, FrameLayout mensagemDecisao, Button btnReiniciarOJogo, Button btnSairDoJogo) {
+
+        if (botoesComParesEncontrados >= 16) {
+            AlertDialog.Builder magBox = new AlertDialog.Builder(context);
+            magBox.setTitle("Escolha");
+            magBox.setMessage("Deseja jogar novamente?");
+            magBox.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+
+                public DialogInterface.OnClickListener activity;
+
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    activity = this;
+                    Intent intent = new Intent((Intent) activity);
+                    context.startActivity(intent);
+                    
                 }
             });
-
-            btnSairDoJogo.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View F) { // adciondei um evento de clique.
+            magBox.setNegativeButton("NÃO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int l) {
+                    Log.d("meuScript", "Saindo...");
                     Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.addCategory(Intent.CATEGORY_HOME);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }
             });
+            magBox.show();
         }
-
         Pontos pontos = new Pontos(txtPontos, txtNumeroAcertos, txtNumeroErros, txtTentivas);            // INSTANCIANDO A CLASSE DOS PONTOS
 
         botoesComParesEncontrados = 0;                                                      // INCIALIZADNO A CONTAGEM DOS BOTÕES COM PARES ENCONTRADOS
