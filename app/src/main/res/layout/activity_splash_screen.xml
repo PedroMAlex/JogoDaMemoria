@@ -7,7 +7,6 @@
     android:background="@drawable/background"
     tools:context=".view.SplashScreenActivity">
 
-
     <TextView
         android:id="@+id/txt_titulo"
         android:layout_width="wrap_content"
@@ -25,22 +24,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btn_proximo"
-        style="@style/borda"
-        android:layout_width="343dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:text="PRÓXIMO"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.806" />
-
     <ImageView
-        android:id="@+id/img_imagemTelaInicial"
         android:layout_width="348dp"
         android:layout_height="275dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_proximo"
@@ -52,19 +36,15 @@
         app:srcCompat="@drawable/imageminicialjpg" />
 
     <Button
-        android:id="@+id/btn_sair"
-        style="@style/borda"
-        android:layout_width="342dp"
-        android:layout_height="56dp"
-        android:backgroundTint="@color/white"
-        android:text="SAIR "
-        android:textColor="@color/black"
+        android:id="@+id/btn_proximo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:text="INICIAR O JOGO"
+        android:background="@drawable/borda"
+        android:textColor="@color/white"
+        android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_proximo"
-        app:layout_constraintVertical_bias="0.276" />
-
-
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

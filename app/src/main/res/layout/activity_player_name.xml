@@ -12,52 +12,43 @@
         android:layout_height="wrap_content"
         android:text="Nome do Jogador"
         android:textColor="@color/black"
-        android:textSize="36dp"
-        app:layout_constraintBottom_toTopOf="@+id/edtNomeDoJogador"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edtNomeDoJogador"
-        android:layout_width="341dp"
-        android:layout_height="41dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btnIniciarOJogo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeDoJogador"
+        tools:layout_editor_absoluteX="20dp" />
 
     <Button
         android:id="@+id/btnIniciarOJogo"
-        style="@style/borda"
-        android:layout_width="343dp"
-        android:layout_height="52dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/borda"
         android:backgroundTint="@color/black"
-        android:text="INICIAR O JOGO"
+        android:text="JOGAR"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSairSegundaTela" />
 
     <Button
         android:id="@+id/btnSairSegundaTela"
-        style="@style/borda"
-        android:layout_width="342dp"
-        android:layout_height="56dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         android:text="SAIR "
         android:textColor="@color/black"
+        android:background="@drawable/botao_sair"
+        android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciarOJogo"
-        app:layout_constraintVertical_bias="0.063" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
