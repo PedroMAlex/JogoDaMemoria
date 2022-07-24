@@ -1,6 +1,3 @@
 <resources>
-    <string name="app_name">Jogodamemoria</string>
-    <string name="ok" />
-    <string name="cancel" />
-
+    <string name="app_name">Jogo da Memória</string>
 </resources>

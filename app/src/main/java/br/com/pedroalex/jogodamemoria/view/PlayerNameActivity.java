@@ -6,31 +6,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import br.com.pedroalex.jogodamemoria.R;
-import br.com.pedroalex.jogodamemoria.view.MainActivity;
 
 public class PlayerNameActivity extends AppCompatActivity {
-    private EditText edtNomeJogador;
-    private Button btnIniciarOJogo;
-    private TextView txtNome;
-    private Button btnSairPlayerName;
     private Activity activity;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_name);
+
+        Button btnSairPlayerName = findViewById(R.id.btnSairSegundaTela);
+        EditText edtNomeJogador = findViewById(R.id.edtNomeDoJogador);
+        Button btnIniciarOJogo = findViewById(R.id.btnIniciarOJogo);
         activity = this;
-        btnIniciarOJogo = findViewById(R.id.btnIniciarOJogo);
-        txtNome = findViewById(R.id.txtNomeDoJogador);
-        btnSairPlayerName = findViewById(R.id.btnSairSegundaTela);
-        edtNomeJogador = findViewById(R.id.edtNomeDoJogador);
 
         btnIniciarOJogo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -40,16 +34,14 @@ public class PlayerNameActivity extends AppCompatActivity {
                     Intent intent = new Intent(activity, MainActivity.class);
                     intent.putExtra("nome", edtNomeJogador.getText().toString());
                     startActivity(intent);
+                    activity.finish();
                 }
             }
         });
 
         btnSairPlayerName.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View F) { // adciondei um evento de clique.
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+            public void onClick(View v) {
+                activity.finish();
             }
         });
     }
