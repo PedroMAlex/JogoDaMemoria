@@ -1,9 +1,11 @@
 package br.com.pedroalex.jogodamemoria.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,10 +13,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import br.com.pedroalex.jogodamemoria.R;
+import br.com.pedroalex.jogodamemoria.util.ButtonEffect;
 
 public class SplashScreenActivity extends AppCompatActivity {
     private Activity activity;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +28,13 @@ public class SplashScreenActivity extends AppCompatActivity {
         activity = this;
 
         txtTitulo.setShadowLayer(10, 0, 0, Color.YELLOW);
+
+        proximo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return ButtonEffect.play(v, event);
+            }
+        });
 
         proximo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
