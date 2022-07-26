@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="#F3F3F3"
     tools:context=".view.SplashScreenActivity">
 
     <TextView
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_titulo"
         app:layout_constraintVertical_bias="0.422"
-        app:srcCompat="@drawable/imageminicialjpg" />
+        app:srcCompat="@drawable/splash" />
 
     <Button
         android:id="@+id/btn_proximo"
