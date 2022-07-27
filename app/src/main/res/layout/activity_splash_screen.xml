@@ -15,7 +15,7 @@
         android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
         android:text="JOGO\nDA\nMEMÓRIA"
-        android:textColor="#000"
+        android:textColor="@color/black"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
