@@ -5,23 +5,38 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
+import android.os.Parcelable;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import br.com.pedroalex.jogodamemoria.R;
 import br.com.pedroalex.jogodamemoria.model.Botao;
+import br.com.pedroalex.jogodamemoria.model.Usuario;
+import br.com.pedroalex.jogodamemoria.view.PlayerNameActivity;
+import br.com.pedroalex.jogodamemoria.view.SplashScreenActivity;
 
 public class MudarImagens {
     private static final int delay = 1000;                                                  // DEFININDO O TEMPO DE ESPERA QUANDO AS IMAGENS NÃO SÃO IGUAIS ANTES DE DESVIRAR
     private static int botoesComParesEncontrados;                                           // CONTAR A QUANTIDADE DE BOTÕES COM PAR ENCONTRADO PARA SABERMOS O MOMENTO DE FINALIZAR O JOGO
+    private List<Usuario> usuarios;
+    private MediaPlayer mp;
 
-    public static void setImagem(Activity activity, Botao botaoClicado, List<Botao> botoes,
+    public void setImagem(Activity activity, Botao botaoClicado, List<Botao> botoes,
                                  TextView txtPontos, TextView txtNumeroAcertos,
-                                 TextView txtNumeroErros, TextView txtTentivas) {
+                                 TextView txtNumeroErros, TextView txtTentivas,
+                                 TextView txtNomeJogador, List<Usuario> users) {
 
+        usuarios = users;
+        mp = MediaPlayer.create(activity, R.raw.click);
         Pontos pontos = new Pontos(txtPontos, txtNumeroAcertos,
                 txtNumeroErros, txtTentivas);                                               // INSTANCIANDO A CLASSE DOS PONTOS
         botoesComParesEncontrados = 0;                                                      // INCIALIZADNO A CONTAGEM DOS BOTÕES COM PARES ENCONTRADOS
@@ -74,16 +89,28 @@ public class MudarImagens {
             }
 
             if (botoesComParesEncontrados >= 16) {                                          // SE O JOGO CHEGOU AO SEU FINAL EXIBIR UMA CAIXA DE DIÁLOGO PERGUNTANDO SE QUER JOGAR NOVAMENTE
+                if (!Objects.isNull(usuarios)) {
+                    if (usuarios.size() < 4) {
+                        usuarios = adicionarRecorde(txtNomeJogador, txtPontos, usuarios);
+                    } else {
+                        for (Usuario u: usuarios) {
+                            if (Integer.parseInt(txtPontos.getText().toString()) > u.getPontos())
+                                usuarios = adicionarRecorde(txtNomeJogador, txtPontos, usuarios);
+                        }
+                    }
+                } else {
+                    usuarios = adicionarRecorde(txtNomeJogador, txtPontos, usuarios);
+                }
+
                 AlertDialog.Builder magBox = new AlertDialog.Builder(activity);
-                magBox.setTitle("VOCÊ CONCLUI O JOGO COM SUCESSO");
+                magBox.setTitle("VOCÊ CONCLUIU O JOGO COM SUCESSO MARCANDO " + pontos + " PONTOS");
                 magBox.setMessage("DESEJA JOGAR NOVAMENTE?");
 
                 magBox.setPositiveButton("SIM", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {           // REINICIAR O JOGO
-                        Intent intent = activity.getBaseContext().getPackageManager()
-                                .getLaunchIntentForPackage(activity.getBaseContext().getPackageName());
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        Intent intent = new Intent(activity, PlayerNameActivity.class);
+                        intent.putExtra("usuarios", (Parcelable) usuarios);
                         activity.startActivity(intent);
                         activity.finish();
                     }
@@ -97,11 +124,13 @@ public class MudarImagens {
                 });
                 magBox.show();
             }
+            mp.start();
         } else {                                                                            // SE O BOTÃO JÁ ESTIVER CLICADO AVISAR AO JOGADOR PARA ESCOLHER UM NÃO CLICADO AINDA
             Toast.makeText(activity, "CLIQUE NUM BOTÃO QUE AINDA NÃO FOI VIRADO", Toast.LENGTH_SHORT).show();
         }
     }
 
+    // MÉTODO QUE VIRA OS BOTÕES QUANDO CLICADO MOSTRANDO A IMAGEM QUE FOI ESCOLHIDA NO SORTEIO
     private static void virarBotao(Context context, Botao botaoClicado) {
         switch (botaoClicado.getNumeroImagemSorteada()) {
             case 0:
@@ -129,5 +158,21 @@ public class MudarImagens {
                 botaoClicado.getImageView().setImageDrawable(context.getDrawable(R.drawable.i07));
                 break;
         }
+    }
+
+    // MÉTODO QUE ADICIONA O JOGADOR NA TABELA DE RECORDES DO JOGO
+    private static List<Usuario> adicionarRecorde(TextView txtNomeJogador, TextView txtPontos, List<Usuario> usuarios) {
+        if (Objects.isNull(usuarios))                                                       // SE A LISTA ESTIVER NULA INSTANCIAR O OBJETO
+            usuarios = new ArrayList<>();
+
+        usuarios.add(
+            new Usuario(
+                    txtNomeJogador.getText().toString(),
+                    Integer.parseInt(txtPontos.getText().toString()),
+                    LocalDate.now()
+            )
+        );
+
+        return usuarios;
     }
 }

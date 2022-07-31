@@ -7,8 +7,7 @@ public class Pontos {
     private TextView txtPontos;
     private TextView txtNumeroErros;
     private TextView txtTentativas;
-    private Integer bonus = 50;
-    private Integer tentativasAcertos = 0;
+    private Integer bonus = 21;
 
     public Pontos(TextView txtPontos, TextView txtNumeroAcertos, TextView txtNumeroErros, TextView txtTentativas) {
         this.txtNumeroAcertos = txtNumeroAcertos;
@@ -23,24 +22,17 @@ public class Pontos {
         int erros = Integer.parseInt(txtNumeroErros.getText().toString());
         int tentativas = Integer.parseInt(txtTentativas.getText().toString());
 
+        tentativas++;
+        bonus = bonus - tentativas;
+        if (bonus < 1) bonus = 0;
+
         if (foiAcerto) {
-            tentativas++;
-            tentativasAcertos = tentativasAcertos++;
-            if (tentativasAcertos <= 1) {
-                acertos++;
-                pontos = pontos + 1;
-                pontos = pontos * bonus;
-            }
-            if (tentativasAcertos > 1) {
-                acertos++;
-                bonus = bonus - 2;
-                pontos = pontos * bonus;
-            }
-
+            acertos++;
+            pontos = (pontos + 10) + bonus;
         } else {
-            tentativas++;
             erros++;
-
+            if (pontos > 0)
+                pontos--;
         }
 
         txtPontos.setText(String.valueOf(pontos));

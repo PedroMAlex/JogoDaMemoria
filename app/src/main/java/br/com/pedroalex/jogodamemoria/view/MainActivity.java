@@ -1,6 +1,7 @@
 package br.com.pedroalex.jogodamemoria.view;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,17 +9,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.pedroalex.jogodamemoria.R;
 import br.com.pedroalex.jogodamemoria.controller.MudarImagens;
 import br.com.pedroalex.jogodamemoria.controller.Sorteio;
 import br.com.pedroalex.jogodamemoria.model.Botao;
+import br.com.pedroalex.jogodamemoria.model.Usuario;
 
 public class MainActivity extends AppCompatActivity {
     private List<Botao> botoes;
     private Activity activity;
-
     private ImageView iv00;
     private ImageView iv01;
     private ImageView iv02;
@@ -41,17 +43,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         activity = this;
-
         carregarComponentes();
     }
 
     private void carregarComponentes() {
+        MudarImagens mudarImagens = new MudarImagens();
+
         TextView txtNumeroAcertos = findViewById(R.id.txtNumeroAcertos);
         TextView txtNumeroErros = findViewById(R.id.txtNumeroErros);
         TextView txtPontos = findViewById(R.id.txtPontos);
         TextView txtJogador = findViewById(R.id.txtJogador);
         TextView txtTentativas = findViewById(R.id.txtTentativas);
         txtJogador.setText(getIntent().getStringExtra("nome"));
+
+        ArrayList<Usuario> usuarios = getIntent().getParcelableArrayListExtra("usuarios");
 
         iv00 = findViewById(R.id.iv00);
         iv01 = findViewById(R.id.iv01);
@@ -76,72 +81,72 @@ public class MainActivity extends AppCompatActivity {
         iv00.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(0), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(0), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(1), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(1), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(2), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(2), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv03.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(3), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(3), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv04.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(4), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(4), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv05.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(5), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(5), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv06.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(6), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(6), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv07.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(7), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(7), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv08.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(8), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(8), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
 
             }
         });
@@ -149,56 +154,56 @@ public class MainActivity extends AppCompatActivity {
         iv09.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(9), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(9), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(10), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(10), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(11), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(11), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(12), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(12), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv13.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(13), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(13), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv14.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(14), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(14), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
 
         iv15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MudarImagens.setImagem(activity, botoes.get(15), botoes, txtPontos,
-                        txtNumeroAcertos, txtNumeroErros, txtTentativas);
+                mudarImagens.setImagem(activity, botoes.get(15), botoes, txtPontos,
+                        txtNumeroAcertos, txtNumeroErros, txtTentativas, txtJogador, usuarios);
             }
         });
     }

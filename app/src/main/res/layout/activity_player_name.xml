@@ -19,14 +19,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/edtNomeDoJogador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btnIniciarOJogo"
         app:layout_constraintTop_toBottomOf="@+id/txtNomeDoJogador"
-        tools:layout_editor_absoluteX="20dp" />
+        tools:layout_editor_absoluteX="20dp" />-->
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layoutNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/custom_edit_text"
+        app:layout_constraintBottom_toTopOf="@+id/btnIniciarOJogo"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeDoJogador"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtNomeDoJogador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:inputType="textCapCharacters"
+            android:hint="seu nome" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnIniciarOJogo"
