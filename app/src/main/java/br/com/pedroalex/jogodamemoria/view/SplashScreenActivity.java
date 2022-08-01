@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.MotionEvent;
@@ -45,6 +46,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         proximo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                MediaPlayer mp = MediaPlayer.create(activity, R.raw.click);
+                mp.start();
                 Intent intent = new Intent(SplashScreenActivity.this, PlayerNameActivity.class);
                 intent.putParcelableArrayListExtra("usuarios", usuarios);
                 startActivity(intent);

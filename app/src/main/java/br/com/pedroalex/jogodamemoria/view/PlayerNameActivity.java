@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,16 +37,21 @@ public class PlayerNameActivity extends AppCompatActivity {
         EditText edtNomeJogador = findViewById(R.id.edtNomeDoJogador);
         activity = this;
 
+        // QUANDO CRIAR O BANCO RETIRAR ISSO
         ArrayList<Usuario> usuarios = getIntent().getParcelableArrayListExtra("usuarios");
 
         txtNomeJogador.setShadowLayer(10, 0, 0, Color.YELLOW);
 
         btnIniciarOJogo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                MediaPlayer mp = MediaPlayer.create(activity, R.raw.click);
+                mp.start();
                 if (edtNomeJogador.getText().length() == 0) {
                     Toast.makeText(activity, "Antes de começar informe seu nome", Toast.LENGTH_LONG).show();
                 } else {
                     Intent intent = new Intent(activity, MainActivity.class);
+
+                    // QUANDO CRIAR O BANCO RETIRAR ISSO
                     intent.putParcelableArrayListExtra("usuarios", usuarios);
                     intent.putExtra("nome", edtNomeJogador.getText().toString().toUpperCase());
                     startActivity(intent);
@@ -56,6 +62,8 @@ public class PlayerNameActivity extends AppCompatActivity {
 
         btnSairPlayerName.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                MediaPlayer mp = MediaPlayer.create(activity, R.raw.click);
+                mp.start();
                 activity.finish();
             }
         });
