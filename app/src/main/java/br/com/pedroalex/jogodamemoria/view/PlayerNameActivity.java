@@ -16,10 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-
 import br.com.pedroalex.jogodamemoria.R;
-import br.com.pedroalex.jogodamemoria.model.Usuario;
 import br.com.pedroalex.jogodamemoria.util.ButtonEffect;
 
 public class PlayerNameActivity extends AppCompatActivity {
@@ -31,15 +28,11 @@ public class PlayerNameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_name);
 
+        activity = this;
         TextView txtNomeJogador = findViewById(R.id.txtNomeDoJogador);
         Button btnSairPlayerName = findViewById(R.id.btnSairSegundaTela);
         Button btnIniciarOJogo = findViewById(R.id.btnIniciarOJogo);
         EditText edtNomeJogador = findViewById(R.id.edtNomeDoJogador);
-        activity = this;
-
-        // QUANDO CRIAR O BANCO RETIRAR ISSO
-        ArrayList<Usuario> usuarios = getIntent().getParcelableArrayListExtra("usuarios");
-
         txtNomeJogador.setShadowLayer(10, 0, 0, Color.YELLOW);
 
         btnIniciarOJogo.setOnClickListener(new View.OnClickListener() {
@@ -50,9 +43,6 @@ public class PlayerNameActivity extends AppCompatActivity {
                     Toast.makeText(activity, "Antes de começar informe seu nome", Toast.LENGTH_LONG).show();
                 } else {
                     Intent intent = new Intent(activity, MainActivity.class);
-
-                    // QUANDO CRIAR O BANCO RETIRAR ISSO
-                    intent.putParcelableArrayListExtra("usuarios", usuarios);
                     intent.putExtra("nome", edtNomeJogador.getText().toString().toUpperCase());
                     startActivity(intent);
                     activity.finish();
