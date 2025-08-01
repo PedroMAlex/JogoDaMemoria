@@ -20,5 +20,9 @@ O jogador deve encontrar os pares de cartas iguais com o menor número de tentat
 
 ---
 
-## 🗂️ Estrutura do Projeto (simplificada)
+## ▶️ Como Executar o Projeto
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/jogo-da-memoria-principe.git
 
